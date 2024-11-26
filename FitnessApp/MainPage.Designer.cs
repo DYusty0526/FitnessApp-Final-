@@ -135,7 +135,7 @@
             btn_MyProgress.TabIndex = 8;
             btn_MyProgress.Text = "My Progress";
             btn_MyProgress.UseVisualStyleBackColor = true;
-            //btn_MyProgress.Click += btn_MyProgress_Click;
+            btn_MyProgress.Click += btn_MyProgress_Click;
             // 
             // MainPage
             // 

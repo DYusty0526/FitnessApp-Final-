@@ -50,7 +50,7 @@
             this.btn_MyGoals.TabIndex = 1;
             this.btn_MyGoals.Text = "My Goals";
             this.btn_MyGoals.UseVisualStyleBackColor = true;
-            //this.btn_MyGoals.Click += new System.EventHandler(this.btn_MyGoals_Click);
+            this.btn_MyGoals.Click += new System.EventHandler(this.btn_MyGoals_Click);
 
             // 
             // dgv_WorkoutLog

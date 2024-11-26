@@ -39,38 +39,31 @@ namespace FitnessApp
 
         private void DrawBarGraph(Graphics g)
         {
-            // Define drawing area
             int graphWidth = 400;
             int graphHeight = 200;
             int xStart = 20;
             int yStart = 20;
 
-            // Background
             g.FillRectangle(Brushes.White, xStart, yStart, graphWidth, graphHeight);
             g.DrawRectangle(Pens.Black, xStart, yStart, graphWidth, graphHeight);
 
-            // Calculate bar width and scaling
             int barWidth = graphWidth / attendanceData.Length;
             int maxAttendance = 20; // Assuming max attendance is 20
             float scale = (float)graphHeight / maxAttendance;
 
-            // Draw bars
             for (int i = 0; i < attendanceData.Length; i++)
             {
                 int barHeight = (int)(attendanceData[i] * scale);
                 int x = xStart + i * barWidth;
                 int y = yStart + graphHeight - barHeight;
 
-                // Draw bar
                 g.FillRectangle(Brushes.Blue, x, y, barWidth - 10, barHeight);
                 g.DrawRectangle(Pens.Black, x, y, barWidth - 10, barHeight);
 
-                // Draw labels
                 g.DrawString(months[i], new Font("Arial", 10), Brushes.Black, x + 5, yStart + graphHeight + 5);
                 g.DrawString(attendanceData[i].ToString(), new Font("Arial", 10), Brushes.Black, x + 5, y - 20);
             }
 
-            // Draw axes
             g.DrawLine(Pens.Black, xStart, yStart + graphHeight, xStart + graphWidth, yStart + graphHeight); // X-axis
             g.DrawLine(Pens.Black, xStart, yStart, xStart, yStart + graphHeight); // Y-axis
         }
@@ -82,11 +75,11 @@ namespace FitnessApp
             this.Hide();
         }
 
-        //private void btn_MyGoals_Click(object sender, EventArgs e)
-        //{
-        //    MyGoalsPage goalsPage = new MyGoalsPage();
-        //    goalsPage.Show();
-        //    this.Hide();
-        //}
+        private void btn_MyGoals_Click(object sender, EventArgs e)
+        {
+            MyGoalsPage goalsPage = new MyGoalsPage();
+            goalsPage.Show();
+            this.Hide();
+        }
     }
 }
