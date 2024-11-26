@@ -37,11 +37,11 @@ namespace FitnessApp
             mainPage.Show();
             this.Hide();
         }
-        //private void btn_ViewHistory_Click(object sender, EventArgs e)
-        //{
-        //    WorkoutHistoryPage historyPage = new WorkoutHistoryPage();
-        //    historyPage.Show();
-        //    this.Hide();
-        //}
+        private void btn_ViewHistory_Click(object sender, EventArgs e)
+        {
+            WorkoutHistoryPage historyPage = new WorkoutHistoryPage();
+            historyPage.Show();
+            this.Hide();
+        }
     }
 }

@@ -159,7 +159,7 @@
             this.btn_ViewHistory.TabIndex = 12;
             this.btn_ViewHistory.Text = "View History";
             this.btn_ViewHistory.UseVisualStyleBackColor = true;
-            //this.btn_ViewHistory.Click += new System.EventHandler(this.btn_ViewHistory_Click);
+            this.btn_ViewHistory.Click += new System.EventHandler(this.btn_ViewHistory_Click);
 
             // 
             // LogWorkoutPage
