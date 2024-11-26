@@ -26,6 +26,9 @@
         {
             this.btn_Back = new System.Windows.Forms.Button();
             this.btn_MyGoals = new System.Windows.Forms.Button();
+            this.dgv_WorkoutLog = new System.Windows.Forms.DataGridView();
+
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_WorkoutLog)).BeginInit();
 
             // 
             // btn_Back
@@ -50,18 +53,31 @@
             //this.btn_MyGoals.Click += new System.EventHandler(this.btn_MyGoals_Click);
 
             // 
+            // dgv_WorkoutLog
+            // 
+            this.dgv_WorkoutLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_WorkoutLog.Location = new System.Drawing.Point(20, 240);
+            this.dgv_WorkoutLog.Name = "dgv_WorkoutLog";
+            this.dgv_WorkoutLog.Size = new System.Drawing.Size(400, 150);
+            this.dgv_WorkoutLog.TabIndex = 2;
+
+            // 
             // WorkoutHistoryPage
             // 
             this.ClientSize = new System.Drawing.Size(450, 450);
+            this.Controls.Add(this.dgv_WorkoutLog);
             this.Controls.Add(this.btn_Back);
             this.Controls.Add(this.btn_MyGoals);
             this.Name = "WorkoutHistoryPage";
             this.Text = "Workout History";
+
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_WorkoutLog)).EndInit();
         }
 
         #endregion
 
         private System.Windows.Forms.Button btn_Back;
         private System.Windows.Forms.Button btn_MyGoals;
+        private System.Windows.Forms.DataGridView dgv_WorkoutLog;
     }
 }

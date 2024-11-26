@@ -13,15 +13,24 @@ namespace FitnessApp
 {
     public partial class WorkoutHistoryPage : Form
     {
-        private int[] attendanceData = { 10, 12, 8, 15, 11, 14 }; 
+        private int[] attendanceData = { 10, 12, 8, 15, 11, 14 }; // Example gym attendance data
         private string[] months = { "June", "July", "Aug", "Sep", "Oct", "Nov" };
 
         public WorkoutHistoryPage()
         {
             InitializeComponent();
-            this.DoubleBuffered = true;
-
+            LoadWorkoutHistory();
         }
+        private void LoadWorkoutHistory()
+        {
+            dgv_WorkoutLog.DataSource = new[]
+            {
+                new { Exercise = "Arm Curls", Duration = "30 mins", Date = "25/11/2024" },
+                new { Exercise = "Squats", Duration = "40 mins", Date = "25/11/2024" },
+                new { Exercise = "Bench Press", Duration = "45 mins", Date = "25/11/2024" }
+            };
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -30,31 +39,38 @@ namespace FitnessApp
 
         private void DrawBarGraph(Graphics g)
         {
+            // Define drawing area
             int graphWidth = 400;
             int graphHeight = 200;
-            int xStart = 50;
-            int yStart = 100;
+            int xStart = 20;
+            int yStart = 20;
 
+            // Background
             g.FillRectangle(Brushes.White, xStart, yStart, graphWidth, graphHeight);
             g.DrawRectangle(Pens.Black, xStart, yStart, graphWidth, graphHeight);
 
+            // Calculate bar width and scaling
             int barWidth = graphWidth / attendanceData.Length;
-            int maxAttendance = 20; 
+            int maxAttendance = 20; // Assuming max attendance is 20
             float scale = (float)graphHeight / maxAttendance;
 
+            // Draw bars
             for (int i = 0; i < attendanceData.Length; i++)
             {
                 int barHeight = (int)(attendanceData[i] * scale);
                 int x = xStart + i * barWidth;
                 int y = yStart + graphHeight - barHeight;
 
+                // Draw bar
                 g.FillRectangle(Brushes.Blue, x, y, barWidth - 10, barHeight);
                 g.DrawRectangle(Pens.Black, x, y, barWidth - 10, barHeight);
 
+                // Draw labels
                 g.DrawString(months[i], new Font("Arial", 10), Brushes.Black, x + 5, yStart + graphHeight + 5);
                 g.DrawString(attendanceData[i].ToString(), new Font("Arial", 10), Brushes.Black, x + 5, y - 20);
             }
 
+            // Draw axes
             g.DrawLine(Pens.Black, xStart, yStart + graphHeight, xStart + graphWidth, yStart + graphHeight); // X-axis
             g.DrawLine(Pens.Black, xStart, yStart, xStart, yStart + graphHeight); // Y-axis
         }

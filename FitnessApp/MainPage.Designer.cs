@@ -115,7 +115,7 @@
             btn_LogMeals.TabIndex = 6;
             btn_LogMeals.Text = "Log Meals";
             btn_LogMeals.UseVisualStyleBackColor = true;
-            //btn_LogMeals.Click += btn_LogMeals_Click;
+            btn_LogMeals.Click += btn_LogMeals_Click;
             // 
             // btn_LogOut
             // 
@@ -125,7 +125,7 @@
             btn_LogOut.TabIndex = 7;
             btn_LogOut.Text = "Log Out";
             btn_LogOut.UseVisualStyleBackColor = true;
-            //btn_LogOut.Click += btn_LogOut_Click;
+            btn_LogOut.Click += btn_LogOut_Click;
             // 
             // btn_MyProgress
             // 
