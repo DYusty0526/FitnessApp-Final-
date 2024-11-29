@@ -84,7 +84,6 @@ namespace FitnessApp
             loginForm.Show();
             this.Close();
         }
-
     }
 
 }

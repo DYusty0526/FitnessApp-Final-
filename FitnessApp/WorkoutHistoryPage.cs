@@ -119,5 +119,12 @@ namespace FitnessApp
             myGoalsPage.Show();
             this.Close();
         }
+        private void btn_Refresh_Click(object sender, EventArgs e)
+        {
+            LoadAttendanceChart();
+            LoadWorkoutLog();
+            MessageBox.Show("Data refreshed!", "Info");
+        }
+
     }
 }

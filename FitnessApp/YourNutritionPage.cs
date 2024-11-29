@@ -18,93 +18,62 @@ namespace FitnessApp
         {
             InitializeComponent();
             _context = context;
-
-            LoadCalorieChart();
-            LoadDailyNutritionLog();
+            LoadCalorieGraph();
+            LoadDailyLog();
         }
 
-        private void LoadCalorieChart()
+        private void LoadCalorieGraph()
         {
-            // Fetch data for the last 7 days
-            var today = DateTime.Today;
-            var oneWeekAgo = today.AddDays(-6);
-
+            var sevenDaysAgo = DateTime.Today.AddDays(-7);
             var calorieData = _context.Meals
-                .Where(m => m.MealDate >= oneWeekAgo && m.MealDate <= today)
+                .Where(m => m.MealDate >= sevenDaysAgo)
                 .GroupBy(m => m.MealDate)
-                .Select(g => new CalorieRecord // Use CalorieRecord class
-                {
-                    Date = g.Key,
-                    TotalCalories = g.Sum(m => m.Calories)
-                })
+                .Select(g => new { Date = g.Key, TotalCalories = g.Sum(m => m.Calories) })
                 .OrderBy(d => d.Date)
                 .ToList();
 
-            // Redraw the chart
-            pnl_CalorieChart.Invalidate();
-            pnl_CalorieChart.Paint += (s, e) => DrawCalorieChart(e.Graphics, calorieData);
-        }
-
-        private void DrawCalorieChart(Graphics graphics, List<CalorieRecord> calorieData)
-        {
-            var barWidth = 50; // Width of each bar
-            var spacing = 20;  // Spacing between bars
-            var maxBarHeight = 150; // Maximum height for the tallest bar
-            var maxCalories = calorieData.Any() ? calorieData.Max(d => d.TotalCalories) : 1; // Prevent divide by zero
-
-            // Set drawing area dimensions
-            var chartWidth = pnl_CalorieChart.Width;
-            var chartHeight = pnl_CalorieChart.Height;
-            var xStart = 20; // Starting X position for the first bar
-            var yBase = chartHeight - 20; // Base Y position for bars
-
-            // Set up fonts and colors
-            using (var barBrush = new SolidBrush(Color.SeaGreen))
-            using (var labelBrush = new SolidBrush(Color.Black))
-            using (var font = new Font("Arial", 10))
+            // Redraw chart manually
+            chart_Calories.Paint += (sender, e) =>
             {
-                foreach (var data in calorieData)
+                var g = e.Graphics;
+                var chartWidth = chart_Calories.ClientSize.Width - 40; // Padding
+                var chartHeight = chart_Calories.ClientSize.Height - 40; // Padding
+                var barWidth = chartWidth / 7; // Assuming 7 days
+
+                // Get max calories for scaling
+                int maxCalories = calorieData.Any() ? calorieData.Max(c => c.TotalCalories) : 1;
+
+                for (int i = 0; i < calorieData.Count; i++)
                 {
-                    // Calculate bar height relative to maxCalories
-                    var barHeight = (int)((data.TotalCalories / (float)maxCalories) * maxBarHeight);
+                    var data = calorieData[i];
+                    var barHeight = (int)((data.TotalCalories / (double)maxCalories) * chartHeight);
 
-                    // Draw the bar
-                    var barX = xStart;
-                    var barY = yBase - barHeight;
-                    graphics.FillRectangle(barBrush, barX, barY, barWidth, barHeight);
-                    
-                    // Draw the date label below the bar
-                    var dateLabel = data.Date.ToString("MM/dd");
-                    var labelX = barX + (barWidth / 2) - (graphics.MeasureString(dateLabel, font).Width / 2);
-                    var labelY = yBase + 5; // Slightly below the bars
-                    graphics.DrawString(dateLabel, font, labelBrush, labelX, labelY);
+                    // Draw bar
+                    var barX = 20 + i * barWidth; // Add margin
+                    var barY = chart_Calories.ClientSize.Height - barHeight - 20; // Invert Y-axis
 
-                    // Draw the calorie label above the bar
-                    var calorieLabel = $"{data.TotalCalories}";
-                    var calorieLabelX = barX + (barWidth / 2) - (graphics.MeasureString(calorieLabel, font).Width / 2);
-                    var calorieLabelY = barY - 15; // Slightly above the bars
-                    graphics.DrawString(calorieLabel, font, labelBrush, calorieLabelX, calorieLabelY);
+                    g.FillRectangle(Brushes.Blue, barX, barY, barWidth - 5, barHeight);
 
-                    // Move to the next bar position
-                    xStart += barWidth + spacing;
+                    // Draw date label
+                    g.DrawString(data.Date.ToShortDateString(), Font, Brushes.Black, barX, chart_Calories.ClientSize.Height - 20);
+
+                    // Draw calorie value
+                    g.DrawString(data.TotalCalories.ToString(), Font, Brushes.Black, barX, barY - 15);
                 }
-            }
+            };
+
+            chart_Calories.Refresh(); // Trigger redraw
         }
 
-        private void LoadDailyNutritionLog()
+        private void LoadDailyLog()
         {
-            // Load today's meals into the DataGridView
             var today = DateTime.Today;
             var meals = _context.Meals
                 .Where(m => m.MealDate == today)
-                .Select(m => new { m.MealName, m.Calories })
                 .ToList();
 
-            dgv_NutritionLog.DataSource = meals;
-
-            // Calculate total calories for today
-            var totalCalories = meals.Sum(m => m.Calories);
-            lbl_TotalCalories.Text = $"Total Calories: {totalCalories}";
+            dgv_DailyMeals.DataSource = meals;
+            lbl_TotalCalories.Text = $"Total Calories: {meals.Sum(m => m.Calories)}";
         }
 
         private void btn_Back_Click(object sender, EventArgs e)
@@ -121,5 +90,4 @@ namespace FitnessApp
             this.Close();
         }
     }
-
 }
