@@ -108,27 +108,27 @@
             // 
             this.txt_Protein.Location = new System.Drawing.Point(150, 140);
             this.txt_Protein.Name = "txt_Protein";
+            this.txt_Protein.PlaceholderText = "Protein";
             this.txt_Protein.Size = new System.Drawing.Size(60, 26);
             this.txt_Protein.TabIndex = 7;
-            this.txt_Protein.PlaceholderText = "Protein";
 
             // 
             // txt_Carbs
             // 
             this.txt_Carbs.Location = new System.Drawing.Point(220, 140);
             this.txt_Carbs.Name = "txt_Carbs";
+            this.txt_Carbs.PlaceholderText = "Carbs";
             this.txt_Carbs.Size = new System.Drawing.Size(60, 26);
             this.txt_Carbs.TabIndex = 8;
-            this.txt_Carbs.PlaceholderText = "Carbs";
 
             // 
             // txt_Fat
             // 
             this.txt_Fat.Location = new System.Drawing.Point(290, 140);
             this.txt_Fat.Name = "txt_Fat";
+            this.txt_Fat.PlaceholderText = "Fat";
             this.txt_Fat.Size = new System.Drawing.Size(60, 26);
             this.txt_Fat.TabIndex = 9;
-            this.txt_Fat.PlaceholderText = "Fat";
 
             // 
             // lbl_Date

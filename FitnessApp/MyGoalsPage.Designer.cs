@@ -78,27 +78,27 @@
             // 
             this.txt_ExerciseDays.Location = new System.Drawing.Point(20, 90);
             this.txt_ExerciseDays.Name = "txt_ExerciseDays";
+            this.txt_ExerciseDays.PlaceholderText = "Days to Exercise";
             this.txt_ExerciseDays.Size = new System.Drawing.Size(200, 26);
             this.txt_ExerciseDays.TabIndex = 3;
-            this.txt_ExerciseDays.PlaceholderText = "Days of Exercise";
 
             // 
             // txt_Exercises
             // 
             this.txt_Exercises.Location = new System.Drawing.Point(20, 130);
             this.txt_Exercises.Name = "txt_Exercises";
+            this.txt_Exercises.PlaceholderText = "Number of Exercises";
             this.txt_Exercises.Size = new System.Drawing.Size(200, 26);
             this.txt_Exercises.TabIndex = 4;
-            this.txt_Exercises.PlaceholderText = "Number of Exercises";
 
             // 
             // txt_ExerciseDuration
             // 
             this.txt_ExerciseDuration.Location = new System.Drawing.Point(20, 170);
             this.txt_ExerciseDuration.Name = "txt_ExerciseDuration";
+            this.txt_ExerciseDuration.PlaceholderText = "Exercise Duration (mins)";
             this.txt_ExerciseDuration.Size = new System.Drawing.Size(200, 26);
             this.txt_ExerciseDuration.TabIndex = 5;
-            this.txt_ExerciseDuration.PlaceholderText = "Exercise Duration (mins)";
 
             // 
             // btn_SetExerciseGoal
@@ -126,27 +126,27 @@
             // 
             this.txt_Meals.Location = new System.Drawing.Point(250, 90);
             this.txt_Meals.Name = "txt_Meals";
+            this.txt_Meals.PlaceholderText = "Number of Meals";
             this.txt_Meals.Size = new System.Drawing.Size(200, 26);
             this.txt_Meals.TabIndex = 8;
-            this.txt_Meals.PlaceholderText = "Number of Meals";
 
             // 
             // txt_MaxCalories
             // 
             this.txt_MaxCalories.Location = new System.Drawing.Point(250, 130);
             this.txt_MaxCalories.Name = "txt_MaxCalories";
+            this.txt_MaxCalories.PlaceholderText = "Max Calories";
             this.txt_MaxCalories.Size = new System.Drawing.Size(200, 26);
             this.txt_MaxCalories.TabIndex = 9;
-            this.txt_MaxCalories.PlaceholderText = "Max Calorie Intake";
 
             // 
             // txt_MaxMacros
             // 
             this.txt_MaxMacros.Location = new System.Drawing.Point(250, 170);
             this.txt_MaxMacros.Name = "txt_MaxMacros";
+            this.txt_MaxMacros.PlaceholderText = "Max Macros";
             this.txt_MaxMacros.Size = new System.Drawing.Size(200, 26);
             this.txt_MaxMacros.TabIndex = 10;
-            this.txt_MaxMacros.PlaceholderText = "Max Macros Intake";
 
             // 
             // btn_SetNutritionGoal
@@ -219,5 +219,6 @@
         private System.Windows.Forms.Button btn_SetNutritionGoal;
         private System.Windows.Forms.Button btn_Back;
         private System.Windows.Forms.Button btn_MyProgress;
+
     }
 }

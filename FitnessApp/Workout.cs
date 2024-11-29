@@ -8,12 +8,12 @@ namespace FitnessApp
 {
     public class Workout
     {
-        public int WorkoutId { get; set; }
-        public string WorkoutType { get; set; }
-        public string ExerciseName { get; set; }
-        public int Duration { get; set; } // in minutes
+        public int Id { get; set; }
+        public string Type { get; set; }
+        public int Duration { get; set; } // Duration in minutes
         public int Repetitions { get; set; }
-        public DateTime WorkoutDate { get; set; }
+        public DateTime Date { get; set; } // This property is required
     }
+
 
 }

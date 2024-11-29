@@ -12,36 +12,49 @@ namespace FitnessApp
 {
     public partial class LogWorkoutPage : Form
     {
-        public LogWorkoutPage()
+        private readonly FitnessAppContext _context;
+
+        public LogWorkoutPage(FitnessAppContext context)
         {
             InitializeComponent();
+            _context = context;
         }
+
         private void btn_AddWorkout_Click(object sender, EventArgs e)
         {
-            string workoutType = txt_WorkoutType.Text;
-            string exercise = txt_Exercise.Text;
-            string duration = txt_Duration.Text;
-            string repetitions = txt_Repetitions.Text;
-            string date = dtp_Date.Value.ToString("dd/MM/yyyy");
+            try
+            {
+                var workout = new Workout
+                {
+                    Type = txt_WorkoutType.Text,
+                    Duration = int.Parse(txt_Duration.Text),
+                    Repetitions = int.Parse(txt_Repetitions.Text),
+                    Date = dtp_WorkoutDate.Value
+                };
 
-            MessageBox.Show(
-                $"Workout Added:\nType: {workoutType}\nExercise: {exercise}\nDuration: {duration}\nRepetitions: {repetitions}\nDate: {date}",
-                "Workout Saved",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+                _context.Workouts.Add(workout);
+                _context.SaveChanges();
+
+                MessageBox.Show("Workout added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding workout: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
         private void btn_Back_Click(object sender, EventArgs e)
         {
-            MainPage mainPage = new MainPage();
+            var mainPage = new MainPage(_context);
             mainPage.Show();
-            this.Hide();
+            this.Close();
         }
+
         private void btn_ViewHistory_Click(object sender, EventArgs e)
         {
-            WorkoutHistoryPage historyPage = new WorkoutHistoryPage();
-            historyPage.Show();
-            this.Hide();
+            var workoutHistoryPage = new WorkoutHistoryPage(_context);
+            workoutHistoryPage.Show();
+            this.Close();
         }
     }
 }

@@ -7,50 +7,78 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FitnessApp
 {
     public partial class LogMealsPage : Form
     {
-        public LogMealsPage()
+        private readonly FitnessAppContext _context;
+
+        public LogMealsPage(FitnessAppContext context)
         {
             InitializeComponent();
+            _context = context;
         }
+
+        // Event handler for Add Meal button
         private void btn_AddMeal_Click(object sender, EventArgs e)
         {
-            // Placeholder logic for saving a meal
-            string mealName = txt_MealName.Text;
-            string description = txt_Description.Text;
-            string calories = txt_Calories.Text;
-            string protein = txt_Protein.Text;
-            string carbs = txt_Carbs.Text;
-            string fat = txt_Fat.Text;
-            string date = dtp_Date.Value.ToString("dd/MM/yyyy");
+            try
+            {
+                // Create a new Meal object
+                var meal = new Meal
+                {
+                    MealName = txt_MealName.Text,
+                    Description = txt_Description.Text,
+                    Calories = int.Parse(txt_Calories.Text),
+                    ProteinPercentage = int.Parse(txt_Protein.Text),
+                    CarbsPercentage = int.Parse(txt_Carbs.Text),
+                    FatPercentage = int.Parse(txt_Fat.Text),
+                    MealDate = dtp_Date.Value
+                };
 
-            // For now, just display a message box with the entered details
-            MessageBox.Show(
-                $"Meal Added:\nName: {mealName}\nDescription: {description}\nCalories: {calories}\nProtein: {protein}\nCarbs: {carbs}\nFat: {fat}\nDate: {date}",
-                "Meal Saved",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+                // Add the new meal to the database
+                _context.Meals.Add(meal);
+                _context.SaveChanges();
 
-            // Later, this logic will connect to the database to save the data
+                MessageBox.Show("Meal added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Clear the fields for a new entry
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding meal: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
+        // Event handler for Back button
         private void btn_Back_Click(object sender, EventArgs e)
         {
-            MainPage mainPage = new MainPage();
+            var mainPage = new MainPage(_context);
             mainPage.Show();
-            this.Hide();
+            this.Close();
         }
 
+        // Event handler for View History button
         private void btn_ViewHistory_Click(object sender, EventArgs e)
         {
-            // Navigate to the Nutrition History Page (e.g., YourNutritionPage)
-            YourNutritionPage nutritionHistoryPage = new YourNutritionPage();
+            var nutritionHistoryPage = new YourNutritionPage(_context);
             nutritionHistoryPage.Show();
-            this.Hide();
+            this.Close();
+        }
+
+        // Helper method to clear the input fields
+        private void ClearFields()
+        {
+            txt_MealName.Text = string.Empty;
+            txt_Description.Text = string.Empty;
+            txt_Calories.Text = string.Empty;
+            txt_Protein.Text = string.Empty;
+            txt_Carbs.Text = string.Empty;
+            txt_Fat.Text = string.Empty;
+            dtp_Date.Value = DateTime.Today;
         }
     }
 }

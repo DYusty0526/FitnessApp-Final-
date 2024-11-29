@@ -12,57 +12,74 @@ namespace FitnessApp
 {
     public partial class MyGoalsPage : Form
     {
-        public MyGoalsPage()
+        private readonly FitnessAppContext _context;
+
+        public MyGoalsPage(FitnessAppContext context)
         {
             InitializeComponent();
+            _context = context;
         }
+
         private void btn_SetExerciseGoal_Click(object sender, EventArgs e)
         {
-            // Placeholder logic to set exercise goals
-            string daysOfExercise = txt_ExerciseDays.Text;
-            string numberOfExercises = txt_Exercises.Text;
-            string exerciseDuration = txt_ExerciseDuration.Text;
+            try
+            {
+                var goal = new ExerciseGoal
+                {
+                    DaysToExercise = int.Parse(txt_ExerciseDays.Text),
+                    TotalExercises = int.Parse(txt_Exercises.Text),
+                    DurationMinutes = int.Parse(txt_ExerciseDuration.Text),
+                    IsWeekly = rbtn_Weekly.Checked
+                };
 
-            // For now, display a message box to confirm the exercise goals
-            MessageBox.Show(
-                $"Exercise Goal Set:\nDays of Exercise: {daysOfExercise}\nNumber of Exercises: {numberOfExercises}\nExercise Duration: {exerciseDuration} mins",
-                "Exercise Goal Saved",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+                // Add to database and save
+                _context.ExerciseGoals.Add(goal);
+                _context.SaveChanges();
 
-            // Later, we will connect this data to the database to save the goal
+                MessageBox.Show("Exercise goal set successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error setting exercise goal: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        // Set Nutrition Goal Button Click Event
         private void btn_SetNutritionGoal_Click(object sender, EventArgs e)
         {
-            // Placeholder logic to set nutrition goals
-            string numberOfMeals = txt_Meals.Text;
-            string maxCalories = txt_MaxCalories.Text;
-            string maxMacros = txt_MaxMacros.Text;
+            try
+            {
+                var goal = new NutritionGoal
+                {
+                    Meals = int.Parse(txt_Meals.Text),
+                    MaxCalories = int.Parse(txt_MaxCalories.Text),
+                    MaxMacros = txt_MaxMacros.Text,
+                    IsWeekly = rbtn_Weekly.Checked
+                };
 
-            // For now, display a message box to confirm the nutrition goals
-            MessageBox.Show(
-                $"Nutrition Goal Set:\nNumber of Meals: {numberOfMeals}\nMax Calorie Intake: {maxCalories}\nMax Macros Intake: {maxMacros}",
-                "Nutrition Goal Saved",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+                // Add to database and save
+                _context.NutritionGoals.Add(goal);
+                _context.SaveChanges();
 
-            // Later, we will connect this data to the database to save the goal
+                MessageBox.Show("Nutrition goal set successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error setting nutrition goal: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
         private void btn_Back_Click(object sender, EventArgs e)
         {
-            YourNutritionPage nutritionPage = new YourNutritionPage();
-            nutritionPage.Show();
-            this.Hide();
+            var previousPage = new YourNutritionPage(_context); // Navigate back to the YourNutritionPage
+            previousPage.Show();
+            this.Close();
         }
+
         private void btn_MyProgress_Click(object sender, EventArgs e)
         {
-            MyProgressPage progressPage = new MyProgressPage();
+            var progressPage = new MyProgressPage(_context); // Navigate to MyProgressPage
             progressPage.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }
