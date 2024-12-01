@@ -13,106 +13,118 @@ namespace FitnessApp
     public partial class MyProgressPage : Form
     {
         private readonly FitnessAppContext _context;
+        private GoalType _selectedGoalType;
 
         public MyProgressPage(FitnessAppContext context)
         {
             InitializeComponent();
             _context = context;
-
-            LoadNutritionProgress();
-            LoadExerciseProgress();
+            _selectedGoalType = GoalType.Weekly; // Default to weekly
+            RefreshProgress(); // Load initial progress
         }
 
-        private void LoadNutritionProgress()
+        private void ToggleGoalType(object sender, EventArgs e)
         {
-            var goal = _context.NutritionGoals.FirstOrDefault();
-
-            if (goal != null)
+            if (rbtn_Weekly.Checked)
             {
-                lbl_NutritionProgress.Text = $"Nutrition Goal: {goal.GoalType}";
+                _selectedGoalType = GoalType.Weekly;
+            }
+            else if (rbtn_Monthly.Checked)
+            {
+                _selectedGoalType = GoalType.Monthly;
+            }
+            RefreshProgress();
+        }
 
-                // Calculate progress for meals
-                var totalMeals = _context.Meals.Count();
-                progressBar_Meals.Value = CalculateProgress(goal.Meals, totalMeals);
+        private void RefreshProgress()
+        {
+            // Refresh progress bars based on logged data
+            var totalCalories = _context.Meals
+                .Where(m => m.MealDate >= GetStartDate() && m.MealDate <= DateTime.Today)
+                .Sum(m => m.Calories);
 
-                // Calculate progress for calories
-                var totalCalories = _context.Meals.Sum(m => m.Calories);
-                progressBar_Calories.Value = CalculateProgress(goal.MaxCalories, totalCalories);
+            var totalMeals = _context.Meals
+                .Count(m => m.MealDate >= GetStartDate() && m.MealDate <= DateTime.Today);
 
-                // Display average macros
-                lbl_MacrosAverage.Text = CalculateMacrosAverage();
+            var avgProtein = _context.Meals
+                .Where(m => m.MealDate >= GetStartDate() && m.MealDate <= DateTime.Today)
+                .Average(m => (double?)m.ProteinPercentage) ?? 0;
+
+            var avgCarbs = _context.Meals
+                .Where(m => m.MealDate >= GetStartDate() && m.MealDate <= DateTime.Today)
+                .Average(m => (double?)m.CarbsPercentage) ?? 0;
+
+            var avgFat = _context.Meals
+                .Where(m => m.MealDate >= GetStartDate() && m.MealDate <= DateTime.Today)
+                .Average(m => (double?)m.FatPercentage) ?? 0;
+
+            progressBar_Calories.Value = Math.Min(progressBar_Calories.Maximum, totalCalories);
+            progressBar_Meals.Value = Math.Min(progressBar_Meals.Maximum, totalMeals);
+            lbl_MacrosAverage.Text = $"Macros Average: P: {avgProtein:F1}% C: {avgCarbs:F1}% F: {avgFat:F1}%";
+
+            var daysExercised = _context.Workouts
+                .Where(w => w.Date >= GetStartDate() && w.Date <= DateTime.Today)
+                .Select(w => w.Date)
+                .Distinct()
+                .Count();
+
+            var totalExercises = _context.Workouts
+                .Where(w => w.Date >= GetStartDate() && w.Date <= DateTime.Today)
+                .Count();
+
+            var avgDuration = _context.Workouts
+                .Where(w => w.Date >= GetStartDate() && w.Date <= DateTime.Today)
+                .Average(w => (double?)w.Duration) ?? 0;
+
+            progressBar_DaysExercised.Value = Math.Min(progressBar_DaysExercised.Maximum, daysExercised);
+            progressBar_ExercisesDone.Value = Math.Min(progressBar_ExercisesDone.Maximum, totalExercises);
+            lbl_AverageExerciseTime.Text = $"Average Exercise Time: {avgDuration:F1} mins";
+
+            // Display goals overview
+            var exerciseGoal = _context.ExerciseGoals.FirstOrDefault(g => g.GoalType == _selectedGoalType);
+            if (exerciseGoal != null)
+            {
+                lbl_ExerciseGoals.Text = $"Exercise Goals: Days - {exerciseGoal.DaysToExercise}, " +
+                                         $"Exercises - {exerciseGoal.TotalExercises}, " +
+                                         $"Duration - {exerciseGoal.DurationMinutes} mins";
             }
             else
             {
-                lbl_NutritionProgress.Text = "No nutrition goals set.";
-                progressBar_Meals.Value = 0;
-                progressBar_Calories.Value = 0;
+                lbl_ExerciseGoals.Text = "Exercise Goals: Not set";
             }
-        }
 
-        private void LoadExerciseProgress()
-        {
-            var goal = _context.ExerciseGoals.FirstOrDefault();
-
-            if (goal != null)
+            var nutritionGoal = _context.NutritionGoals.FirstOrDefault(g => g.GoalType == _selectedGoalType);
+            if (nutritionGoal != null)
             {
-                lbl_FitnessProgress.Text = $"Exercise Goal: {goal.GoalType}";
-
-                // Calculate progress for days exercised
-                var daysExercised = _context.Workouts
-                    .Select(w => w.Date.Date)
-                    .Distinct()
-                    .Count();
-                progressBar_DaysExercised.Value = CalculateProgress(goal.DaysToExercise, daysExercised);
-
-                // Calculate progress for total exercises
-                var totalExercises = _context.Workouts.Count();
-                progressBar_ExercisesDone.Value = CalculateProgress(goal.TotalExercises, totalExercises);
-
-                // Display average exercise time
-                var totalTime = _context.Workouts.Sum(w => w.Duration);
-                lbl_AverageExerciseTime.Text = $"Average Exercise Time: {totalTime / Math.Max(1, daysExercised)} mins";
+                lbl_NutritionGoals.Text = $"Nutrition Goals: Meals - {nutritionGoal.Meals}, " +
+                                          $"Calories - {nutritionGoal.MaxCalories}, " +
+                                          $"Macros - {nutritionGoal.MaxMacros}";
             }
             else
             {
-                lbl_FitnessProgress.Text = "No exercise goals set.";
-                progressBar_DaysExercised.Value = 0;
-                progressBar_ExercisesDone.Value = 0;
-                lbl_AverageExerciseTime.Text = "Average Exercise Time: 0 mins";
+                lbl_NutritionGoals.Text = "Nutrition Goals: Not set";
             }
         }
 
-        private int CalculateProgress(int goal, int current)
+        private DateTime GetStartDate()
         {
-            if (goal == 0) return 0;
-            return Math.Min((current * 100) / goal, 100); // Cap progress at 100%
-        }
-
-        private string CalculateMacrosAverage()
-        {
-            var totalMeals = _context.Meals.Count();
-            if (totalMeals == 0) return "Macros Average: P: 0% C: 0% F: 0%";
-
-            var totalProtein = _context.Meals.Sum(m => m.ProteinPercentage);
-            var totalCarbs = _context.Meals.Sum(m => m.CarbsPercentage);
-            var totalFat = _context.Meals.Sum(m => m.FatPercentage);
-
-            return $"Macros Average: P: {totalProtein / totalMeals}% C: {totalCarbs / totalMeals}% F: {totalFat / totalMeals}%";
+            return _selectedGoalType == GoalType.Weekly
+                ? DateTime.Today.AddDays(-7)
+                : DateTime.Today.AddMonths(-1);
         }
 
         private void btn_Back_Click(object sender, EventArgs e)
         {
-            var previousPage = new MyGoalsPage(_context); // Navigate to the MyGoalsPage
-            previousPage.Show();
+            var mainPage = new MainPage(_context);
+            mainPage.Show();
             this.Close();
         }
 
         private void btn_LogOut_Click(object sender, EventArgs e)
         {
-            var loginForm = new LoginForm(_context); // Pass the context
+            var loginForm = new LoginForm(_context);
             loginForm.Show();
             this.Close();
         }
-
     }
 }

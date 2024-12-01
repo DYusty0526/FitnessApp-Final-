@@ -19,41 +19,53 @@ namespace FitnessApp
             InitializeComponent();
             _context = context;
 
-            LoadWorkoutData();
-            LoadNutritionData();
+            RefreshWorkouts();
+            RefreshMeals();
         }
 
-        private void LoadWorkoutData()
+        private void RefreshWorkouts()
         {
             var today = DateTime.Today;
-            var workouts = _context.Workouts.Where(w => w.Date == today).ToList();
+            var workouts = _context.Workouts
+                .Where(w => w.Date == today)
+                .Take(3) // Show up to 3 workouts
+                .ToList();
+
+            lst_Workouts.Items.Clear(); // Clear the ListBox before adding new items
 
             if (workouts.Any())
             {
-                lbl_WorkoutToday.Text = $"Workout: {workouts[0].Type} ({workouts[0].Repetitions} Sets)";
-                lbl_WorkoutHours.Text = $"Total Hours: {workouts.Sum(w => w.Duration)}";
+                foreach (var workout in workouts)
+                {
+                    lst_Workouts.Items.Add($"{workout.Type}: {workout.Repetitions} sets, {workout.Duration} mins");
+                }
             }
             else
             {
-                lbl_WorkoutToday.Text = "No workouts logged today.";
-                lbl_WorkoutHours.Text = "Total Hours: 0";
+                lst_Workouts.Items.Add("No workouts logged today.");
             }
         }
 
-        private void LoadNutritionData()
+        private void RefreshMeals()
         {
             var today = DateTime.Today;
-            var meals = _context.Meals.Where(m => m.MealDate == today).ToList();
+            var meals = _context.Meals
+                .Where(m => m.MealDate == today)
+                .Take(3) // Show up to 3 meals
+                .ToList();
+
+            lst_Meals.Items.Clear(); // Clear the ListBox before adding new items
 
             if (meals.Any())
             {
-                lbl_NutritionToday.Text = $"Meal: {meals[0].MealName} ({meals[0].Calories} Calories)";
-                lbl_TotalCalories.Text = $"Total Calories: {meals.Sum(m => m.Calories)}";
+                foreach (var meal in meals)
+                {
+                    lst_Meals.Items.Add($"{meal.MealName}: {meal.Calories} calories");
+                }
             }
             else
             {
-                lbl_NutritionToday.Text = "No meals logged today.";
-                lbl_TotalCalories.Text = "Total Calories: 0";
+                lst_Meals.Items.Add("No meals logged today.");
             }
         }
 
@@ -71,7 +83,14 @@ namespace FitnessApp
             this.Hide();
         }
 
-        private void btn_MyProgress_Click(object sender, EventArgs e)
+        private void btn_ViewGoals_Click(object sender, EventArgs e)
+        {
+            var myGoalsPage = new MyGoalsPage(_context);
+            myGoalsPage.Show();
+            this.Hide();
+        }
+
+        private void btn_ViewProgress_Click(object sender, EventArgs e)
         {
             var myProgressPage = new MyProgressPage(_context);
             myProgressPage.Show();
@@ -80,10 +99,16 @@ namespace FitnessApp
 
         private void btn_LogOut_Click(object sender, EventArgs e)
         {
-            var loginForm = new LoginForm(_context); // Pass the context
+            var loginForm = new LoginForm(_context);
             loginForm.Show();
             this.Close();
         }
-    }
 
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            RefreshWorkouts();
+            RefreshMeals();
+        }
+    }
 }

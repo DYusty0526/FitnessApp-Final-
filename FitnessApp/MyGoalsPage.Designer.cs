@@ -50,6 +50,7 @@
             this.rbtn_Weekly.TabStop = true;
             this.rbtn_Weekly.Text = "Weekly";
             this.rbtn_Weekly.UseVisualStyleBackColor = true;
+            this.rbtn_Weekly.CheckedChanged += new System.EventHandler(this.ToggleGoalType);
 
             // 
             // rbtn_Monthly
@@ -62,6 +63,7 @@
             this.rbtn_Monthly.TabStop = true;
             this.rbtn_Monthly.Text = "Monthly";
             this.rbtn_Monthly.UseVisualStyleBackColor = true;
+            this.rbtn_Monthly.CheckedChanged += new System.EventHandler(this.ToggleGoalType);
 
             // 
             // lbl_ExerciseGoals

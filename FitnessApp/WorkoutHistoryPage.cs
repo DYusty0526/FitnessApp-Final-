@@ -14,84 +14,45 @@ namespace FitnessApp
     public partial class WorkoutHistoryPage : Form
     {
         private readonly FitnessAppContext _context;
+        private System.Collections.Generic.List<AttendanceRecord> _attendanceData;
 
         public WorkoutHistoryPage(FitnessAppContext context)
         {
             InitializeComponent();
             _context = context;
 
-            // Load the data
-            LoadAttendanceChart();
+            // Load data for the chart and workout log
+            LoadAttendanceData();
             LoadWorkoutLog();
         }
 
-        private void LoadAttendanceChart()
+        private void WorkoutHistoryPage_Paint(object sender, PaintEventArgs e)
         {
-            // Calculate attendance for the last 6 months
+            // Draw the chart whenever the form is repainted
+            if (_attendanceData != null)
+            {
+                DrawBarChart(e.Graphics, _attendanceData);
+            }
+        }
+
+        private void LoadAttendanceData()
+        {
+            // Example data: Retrieve the last 6 months of attendance data
             var today = DateTime.Today;
             var sixMonthsAgo = today.AddMonths(-6);
 
-            // Fetch attendance data grouped by month
-            var attendanceData = _context.Workouts
-                .Where(w => w.Date >= sixMonthsAgo && w.Date <= today) // Filter workouts in the last 6 months
-                .GroupBy(w => new { Year = w.Date.Year, Month = w.Date.Month }) // Group by year and month
-                .Select(g => new AttendanceRecord // Map to AttendanceRecord
+            _attendanceData = _context.Workouts
+                .Where(w => w.Date >= sixMonthsAgo && w.Date <= today)
+                .GroupBy(w => new { w.Date.Year, w.Date.Month })
+                .Select(g => new AttendanceRecord
                 {
-                    Month = g.Key.Month, // Extract month
-                    Count = g.Count()    // Count workouts in that month
+                    Month = new DateTime(g.Key.Year, g.Key.Month, 1).ToString("MMM yyyy"),
+                    Count = g.Count()
                 })
-                .OrderBy(d => d.Month) // Order by month
-                .ToList(); // Convert to a list
+                .ToList();
 
-            // Redraw the chart on the Panel
-            pnl_Chart.Invalidate();
-            pnl_Chart.Paint += (s, e) => DrawChart(e.Graphics, attendanceData);
-        }
-
-        private void DrawChart(Graphics graphics, List<AttendanceRecord> attendanceData)
-        {
-            var barWidth = 50; // Width of each bar
-            var spacing = 20;  // Spacing between bars
-            var maxBarHeight = 150; // Maximum height for the tallest bar
-            var maxCount = attendanceData.Any() ? attendanceData.Max(d => d.Count) : 1; // Prevent divide by zero
-
-            // Set drawing area dimensions
-            var chartWidth = pnl_Chart.Width;
-            var chartHeight = pnl_Chart.Height;
-            var xStart = 20; // Starting X position for the first bar
-            var yBase = chartHeight - 20; // Base Y position for bars
-
-            // Set up fonts and colors
-            using (var barBrush = new SolidBrush(Color.CornflowerBlue))
-            using (var labelBrush = new SolidBrush(Color.Black))
-            using (var font = new Font("Arial", 10))
-            {
-                foreach (var data in attendanceData)
-                {
-                    // Calculate bar height relative to maxCount
-                    var barHeight = (int)((data.Count / (float)maxCount) * maxBarHeight);
-
-                    // Draw the bar
-                    var barX = xStart;
-                    var barY = yBase - barHeight;
-                    graphics.FillRectangle(barBrush, barX, barY, barWidth, barHeight);
-
-                    // Draw the month label
-                    var monthLabel = $"{data.Month}";
-                    var labelX = barX + (barWidth / 2) - (graphics.MeasureString(monthLabel, font).Width / 2);
-                    var labelY = yBase + 5; // Slightly below the bars
-                    graphics.DrawString(monthLabel, font, labelBrush, labelX, labelY);
-
-                    // Draw the count label above the bar
-                    var countLabel = $"{data.Count}";
-                    var countLabelX = barX + (barWidth / 2) - (graphics.MeasureString(countLabel, font).Width / 2);
-                    var countLabelY = barY - 15; // Slightly above the bars
-                    graphics.DrawString(countLabel, font, labelBrush, countLabelX, countLabelY);
-
-                    // Move to the next bar position
-                    xStart += barWidth + spacing;
-                }
-            }
+            // Trigger a repaint to update the chart
+            Invalidate();
         }
 
         private void LoadWorkoutLog()
@@ -104,6 +65,27 @@ namespace FitnessApp
                 .ToList();
 
             dgv_WorkoutLog.DataSource = workouts;
+        }
+
+        private void DrawBarChart(Graphics g, System.Collections.Generic.List<AttendanceRecord> data)
+        {
+            // Chart dimensions
+            int x = 50;
+            int y = 50;
+            int barWidth = 40;
+            int barSpacing = 20;
+            int chartHeight = 200;
+            int maxCount = data.Any() ? data.Max(d => d.Count) : 1;
+
+            // Draw the bars
+            for (int i = 0; i < data.Count; i++)
+            {
+                var record = data[i];
+                int barHeight = (int)((record.Count / (double)maxCount) * chartHeight);
+                g.FillRectangle(Brushes.Blue, x + i * (barWidth + barSpacing), y + (chartHeight - barHeight), barWidth, barHeight);
+                g.DrawString(record.Month, Font, Brushes.Black, x + i * (barWidth + barSpacing), y + chartHeight + 5);
+                g.DrawString(record.Count.ToString(), Font, Brushes.Black, x + i * (barWidth + barSpacing), y + (chartHeight - barHeight) - 20);
+            }
         }
 
         private void btn_Back_Click(object sender, EventArgs e)
@@ -119,12 +101,5 @@ namespace FitnessApp
             myGoalsPage.Show();
             this.Close();
         }
-        private void btn_Refresh_Click(object sender, EventArgs e)
-        {
-            LoadAttendanceChart();
-            LoadWorkoutLog();
-            MessageBox.Show("Data refreshed!", "Info");
-        }
-
     }
 }
