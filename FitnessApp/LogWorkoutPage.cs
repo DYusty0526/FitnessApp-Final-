@@ -54,29 +54,6 @@ namespace FitnessApp
                 MessageBox.Show("Please select a workout to delete.", "Error");
             }
         }
-
-        private void btn_UpdateWorkout_Click(object sender, EventArgs e)
-        {
-            if (dgv_Workouts.CurrentRow != null)
-            {
-                var selectedWorkout = (Workout)dgv_Workouts.CurrentRow.DataBoundItem;
-
-                selectedWorkout.Type = cmb_WorkoutType.Text;
-                selectedWorkout.Repetitions = int.Parse(txt_Repetitions.Text);
-                selectedWorkout.Duration = int.Parse(txt_Duration.Text);
-                selectedWorkout.Date = dtp_WorkoutDate.Value.Date;
-
-                _context.SaveChanges();
-
-                MessageBox.Show("Workout updated successfully!", "Success");
-                RefreshWorkouts();
-            }
-            else
-            {
-                MessageBox.Show("Please select a workout to update.", "Error");
-            }
-        }
-
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
             RefreshWorkouts();

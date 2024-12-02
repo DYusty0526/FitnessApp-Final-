@@ -111,6 +111,9 @@
             this.btn_SetExerciseGoal.TabIndex = 6;
             this.btn_SetExerciseGoal.Text = "Set Exercise Goal";
             this.btn_SetExerciseGoal.UseVisualStyleBackColor = true;
+            this.btn_SetExerciseGoal.BackColor = System.Drawing.Color.White;
+            this.btn_SetExerciseGoal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_SetExerciseGoal.ForeColor = System.Drawing.Color.DarkOrange;
             this.btn_SetExerciseGoal.Click += new System.EventHandler(this.btn_SetExerciseGoal_Click);
 
             // 
@@ -159,6 +162,9 @@
             this.btn_SetNutritionGoal.TabIndex = 11;
             this.btn_SetNutritionGoal.Text = "Set Nutrition Goal";
             this.btn_SetNutritionGoal.UseVisualStyleBackColor = true;
+            this.btn_SetExerciseGoal.BackColor = System.Drawing.Color.White;
+            this.btn_SetExerciseGoal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_SetExerciseGoal.ForeColor = System.Drawing.Color.DarkOrange;
             this.btn_SetNutritionGoal.Click += new System.EventHandler(this.btn_SetNutritionGoal_Click);
 
             // 
@@ -170,6 +176,9 @@
             this.btn_Back.TabIndex = 12;
             this.btn_Back.Text = "Back";
             this.btn_Back.UseVisualStyleBackColor = true;
+            this.btn_SetExerciseGoal.BackColor = System.Drawing.Color.White;
+            this.btn_SetExerciseGoal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_SetExerciseGoal.ForeColor = System.Drawing.Color.DarkOrange;
             this.btn_Back.Click += new System.EventHandler(this.btn_Back_Click);
 
             // 
@@ -181,6 +190,9 @@
             this.btn_MyProgress.TabIndex = 13;
             this.btn_MyProgress.Text = "My Progress";
             this.btn_MyProgress.UseVisualStyleBackColor = true;
+            this.btn_SetExerciseGoal.BackColor = System.Drawing.Color.White;
+            this.btn_SetExerciseGoal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_SetExerciseGoal.ForeColor = System.Drawing.Color.DarkOrange;
             this.btn_MyProgress.Click += new System.EventHandler(this.btn_MyProgress_Click);
 
             // 
@@ -203,6 +215,8 @@
             this.Controls.Add(this.btn_MyProgress);
             this.Name = "MyGoalsPage";
             this.Text = "Set Your Goals";
+            this.BackColor = System.Drawing.Color.DarkOrange;
+
         }
 
         #endregion

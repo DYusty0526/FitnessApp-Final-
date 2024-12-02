@@ -23,124 +23,152 @@
 
         private void InitializeComponent()
         {
-            this.grp_Workouts = new System.Windows.Forms.GroupBox();
-            this.lst_Workouts = new System.Windows.Forms.ListBox();
-            this.grp_Nutrition = new System.Windows.Forms.GroupBox();
-            this.lst_Meals = new System.Windows.Forms.ListBox();
-            this.btn_LogWorkout = new System.Windows.Forms.Button();
-            this.btn_LogMeals = new System.Windows.Forms.Button();
-            this.btn_ViewGoals = new System.Windows.Forms.Button();
-            this.btn_ViewProgress = new System.Windows.Forms.Button();
-            this.btn_LogOut = new System.Windows.Forms.Button();
-
-            this.SuspendLayout();
-
-            // GroupBox: Workouts
-            this.grp_Workouts.Controls.Add(this.lst_Workouts);
-            this.grp_Workouts.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.grp_Workouts.Location = new System.Drawing.Point(20, 20);
-            this.grp_Workouts.Name = "grp_Workouts";
-            this.grp_Workouts.Size = new System.Drawing.Size(180, 200);
-            this.grp_Workouts.TabIndex = 0;
-            this.grp_Workouts.TabStop = false;
-            this.grp_Workouts.Text = "Today's Workouts";
-
-            // ListBox: Workouts
-            this.lst_Workouts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lst_Workouts.FormattingEnabled = true;
-            this.lst_Workouts.ItemHeight = 20;
-            this.lst_Workouts.Location = new System.Drawing.Point(3, 23);
-            this.lst_Workouts.Name = "lst_Workouts";
-            this.lst_Workouts.Size = new System.Drawing.Size(174, 174);
-            this.lst_Workouts.TabIndex = 1;
-
-            // GroupBox: Nutrition
-            this.grp_Nutrition.Controls.Add(this.lst_Meals);
-            this.grp_Nutrition.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.grp_Nutrition.Location = new System.Drawing.Point(210, 20);
-            this.grp_Nutrition.Name = "grp_Nutrition";
-            this.grp_Nutrition.Size = new System.Drawing.Size(180, 200);
-            this.grp_Nutrition.TabIndex = 2;
-            this.grp_Nutrition.TabStop = false;
-            this.grp_Nutrition.Text = "Today's Meals";
-
-            // ListBox: Meals
-            this.lst_Meals.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lst_Meals.FormattingEnabled = true;
-            this.lst_Meals.ItemHeight = 20;
-            this.lst_Meals.Location = new System.Drawing.Point(3, 23);
-            this.lst_Meals.Name = "lst_Meals";
-            this.lst_Meals.Size = new System.Drawing.Size(174, 174);
-            this.lst_Meals.TabIndex = 3;
-
-            // Button: Log Workout
-            this.btn_LogWorkout.Location = new System.Drawing.Point(20, 230);
-            this.btn_LogWorkout.Name = "btn_LogWorkout";
-            this.btn_LogWorkout.Size = new System.Drawing.Size(150, 40);
-            this.btn_LogWorkout.TabIndex = 4;
-            this.btn_LogWorkout.Text = "Log Workout";
-            this.btn_LogWorkout.UseVisualStyleBackColor = true;
-            this.btn_LogWorkout.Click += new System.EventHandler(this.btn_LogWorkout_Click);
-
-            // Button: Log Meals
-            this.btn_LogMeals.Location = new System.Drawing.Point(210, 230);
-            this.btn_LogMeals.Name = "btn_LogMeals";
-            this.btn_LogMeals.Size = new System.Drawing.Size(150, 40);
-            this.btn_LogMeals.TabIndex = 5;
-            this.btn_LogMeals.Text = "Log Meals";
-            this.btn_LogMeals.UseVisualStyleBackColor = true;
-            this.btn_LogMeals.Click += new System.EventHandler(this.btn_LogMeals_Click);
-
-            // Button: View Goals
-            this.btn_ViewGoals.Location = new System.Drawing.Point(20, 280);
-            this.btn_ViewGoals.Name = "btn_ViewGoals";
-            this.btn_ViewGoals.Size = new System.Drawing.Size(150, 40);
-            this.btn_ViewGoals.TabIndex = 6;
-            this.btn_ViewGoals.Text = "View My Goals";
-            this.btn_ViewGoals.UseVisualStyleBackColor = true;
-            this.btn_ViewGoals.Click += new System.EventHandler(this.btn_ViewGoals_Click);
-
-            // Button: View Progress
-            this.btn_ViewProgress.Location = new System.Drawing.Point(210, 280);
-            this.btn_ViewProgress.Name = "btn_ViewProgress";
-            this.btn_ViewProgress.Size = new System.Drawing.Size(150, 40);
-            this.btn_ViewProgress.TabIndex = 7;
-            this.btn_ViewProgress.Text = "View My Progress";
-            this.btn_ViewProgress.UseVisualStyleBackColor = true;
-            this.btn_ViewProgress.Click += new System.EventHandler(this.btn_ViewProgress_Click);
-
-            // Button: Logout
-            this.btn_LogOut.Location = new System.Drawing.Point(20, 330);
-            this.btn_LogOut.Name = "btn_LogOut";
-            this.btn_LogOut.Size = new System.Drawing.Size(340, 40);
-            this.btn_LogOut.TabIndex = 8;
-            this.btn_LogOut.Text = "Logout";
-            this.btn_LogOut.UseVisualStyleBackColor = true;
-            this.btn_LogOut.Click += new System.EventHandler(this.btn_LogOut_Click);
-
+            grp_Exercise = new GroupBox();
+            lbl_TodayWorkout = new Label();
+            btn_LogWorkout = new Button();
+            grp_Nutrition = new GroupBox();
+            lbl_TodayMeals = new Label();
+            btn_LogMeals = new Button();
+            btn_ViewGoals = new Button();
+            btn_ViewProgress = new Button();
+            btn_LogOut = new Button();
+            grp_Exercise.SuspendLayout();
+            grp_Nutrition.SuspendLayout();
+            SuspendLayout();
+            // 
+            // grp_Exercise
+            // 
+            grp_Exercise.Controls.Add(lbl_TodayWorkout);
+            grp_Exercise.Controls.Add(btn_LogWorkout);
+            grp_Exercise.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            grp_Exercise.ForeColor = Color.DarkOrange;
+            grp_Exercise.Location = new Point(20, 20);
+            grp_Exercise.Name = "grp_Exercise";
+            grp_Exercise.Size = new Size(360, 100);
+            grp_Exercise.TabIndex = 0;
+            grp_Exercise.TabStop = false;
+            grp_Exercise.Text = "Exercise";
+            // 
+            // lbl_TodayWorkout
+            // 
+            lbl_TodayWorkout.AutoSize = true;
+            lbl_TodayWorkout.Location = new Point(10, 30);
+            lbl_TodayWorkout.Name = "lbl_TodayWorkout";
+            lbl_TodayWorkout.Size = new Size(196, 23);
+            lbl_TodayWorkout.TabIndex = 0;
+            lbl_TodayWorkout.Text = "Today's Workout: None";
+            // 
+            // btn_LogWorkout
+            // 
+            btn_LogWorkout.BackColor = Color.DarkOrange;
+            btn_LogWorkout.ForeColor = Color.White;
+            btn_LogWorkout.Location = new Point(212, 30);
+            btn_LogWorkout.Name = "btn_LogWorkout";
+            btn_LogWorkout.Size = new Size(128, 52);
+            btn_LogWorkout.TabIndex = 1;
+            btn_LogWorkout.Text = "Log Workout";
+            btn_LogWorkout.UseVisualStyleBackColor = false;
+            btn_LogWorkout.Click += btn_LogWorkout_Click;
+            // 
+            // grp_Nutrition
+            // 
+            grp_Nutrition.Controls.Add(lbl_TodayMeals);
+            grp_Nutrition.Controls.Add(btn_LogMeals);
+            grp_Nutrition.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            grp_Nutrition.ForeColor = Color.DarkOrange;
+            grp_Nutrition.Location = new Point(20, 130);
+            grp_Nutrition.Name = "grp_Nutrition";
+            grp_Nutrition.Size = new Size(360, 100);
+            grp_Nutrition.TabIndex = 1;
+            grp_Nutrition.TabStop = false;
+            grp_Nutrition.Text = "Nutrition";
+            // 
+            // lbl_TodayMeals
+            // 
+            lbl_TodayMeals.AutoSize = true;
+            lbl_TodayMeals.Location = new Point(10, 30);
+            lbl_TodayMeals.Name = "lbl_TodayMeals";
+            lbl_TodayMeals.Size = new Size(171, 23);
+            lbl_TodayMeals.TabIndex = 0;
+            lbl_TodayMeals.Text = "Today's Meals: None";
+            // 
+            // btn_LogMeals
+            // 
+            btn_LogMeals.BackColor = Color.DarkOrange;
+            btn_LogMeals.ForeColor = Color.White;
+            btn_LogMeals.Location = new Point(220, 30);
+            btn_LogMeals.Name = "btn_LogMeals";
+            btn_LogMeals.Size = new Size(120, 40);
+            btn_LogMeals.TabIndex = 1;
+            btn_LogMeals.Text = "Log Meals";
+            btn_LogMeals.UseVisualStyleBackColor = false;
+            btn_LogMeals.Click += btn_LogMeals_Click;
+            // 
+            // btn_ViewGoals
+            // 
+            btn_ViewGoals.BackColor = Color.DarkOrange;
+            btn_ViewGoals.ForeColor = Color.White;
+            btn_ViewGoals.Location = new Point(20, 250);
+            btn_ViewGoals.Name = "btn_ViewGoals";
+            btn_ViewGoals.Size = new Size(120, 40);
+            btn_ViewGoals.TabIndex = 2;
+            btn_ViewGoals.Text = "My Goals";
+            btn_ViewGoals.UseVisualStyleBackColor = false;
+            btn_ViewGoals.Click += btn_ViewGoals_Click;
+            // 
+            // btn_ViewProgress
+            // 
+            btn_ViewProgress.BackColor = Color.DarkOrange;
+            btn_ViewProgress.ForeColor = Color.White;
+            btn_ViewProgress.Location = new Point(150, 250);
+            btn_ViewProgress.Name = "btn_ViewProgress";
+            btn_ViewProgress.Size = new Size(120, 40);
+            btn_ViewProgress.TabIndex = 3;
+            btn_ViewProgress.Text = "My Progress";
+            btn_ViewProgress.UseVisualStyleBackColor = false;
+            btn_ViewProgress.Click += btn_ViewProgress_Click;
+            // 
+            // btn_LogOut
+            // 
+            btn_LogOut.BackColor = Color.DarkOrange;
+            btn_LogOut.ForeColor = Color.White;
+            btn_LogOut.Location = new Point(280, 250);
+            btn_LogOut.Name = "btn_LogOut";
+            btn_LogOut.Size = new Size(100, 40);
+            btn_LogOut.TabIndex = 4;
+            btn_LogOut.Text = "Logout";
+            btn_LogOut.UseVisualStyleBackColor = false;
+            btn_LogOut.Click += btn_LogOut_Click;
+            // 
             // MainPage
-            this.ClientSize = new System.Drawing.Size(400, 400);
-            this.Controls.Add(this.grp_Workouts);
-            this.Controls.Add(this.grp_Nutrition);
-            this.Controls.Add(this.btn_LogWorkout);
-            this.Controls.Add(this.btn_LogMeals);
-            this.Controls.Add(this.btn_ViewGoals);
-            this.Controls.Add(this.btn_ViewProgress);
-            this.Controls.Add(this.btn_LogOut);
-            this.Name = "MainPage";
-            this.Text = "Fitness App - Main Page";
-            this.ResumeLayout(false);
+            // 
+            BackColor = Color.White;
+            ClientSize = new Size(400, 350);
+            Controls.Add(grp_Exercise);
+            Controls.Add(grp_Nutrition);
+            Controls.Add(btn_ViewGoals);
+            Controls.Add(btn_ViewProgress);
+            Controls.Add(btn_LogOut);
+            Name = "MainPage";
+            Text = "Fitness App - Main Page";
+            grp_Exercise.ResumeLayout(false);
+            grp_Exercise.PerformLayout();
+            grp_Nutrition.ResumeLayout(false);
+            grp_Nutrition.PerformLayout();
+            ResumeLayout(false);
         }
+
         #endregion
 
-        private System.Windows.Forms.GroupBox grp_Workouts;
-        private System.Windows.Forms.ListBox lst_Workouts;
+        private System.Windows.Forms.GroupBox grp_Exercise;
         private System.Windows.Forms.GroupBox grp_Nutrition;
-        private System.Windows.Forms.ListBox lst_Meals;
+        private System.Windows.Forms.Label lbl_TodayWorkout;
+        private System.Windows.Forms.Label lbl_TodayMeals;
         private System.Windows.Forms.Button btn_LogWorkout;
         private System.Windows.Forms.Button btn_LogMeals;
         private System.Windows.Forms.Button btn_ViewGoals;
         private System.Windows.Forms.Button btn_ViewProgress;
         private System.Windows.Forms.Button btn_LogOut;
+
     }
 }

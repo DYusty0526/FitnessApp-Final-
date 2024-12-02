@@ -18,54 +18,39 @@ namespace FitnessApp
         {
             InitializeComponent();
             _context = context;
-
-            RefreshWorkouts();
-            RefreshMeals();
+            LoadWorkoutData();
+            LoadNutritionData();
         }
 
-        private void RefreshWorkouts()
+        private void LoadWorkoutData()
         {
             var today = DateTime.Today;
-            var workouts = _context.Workouts
-                .Where(w => w.Date == today)
-                .Take(3) // Show up to 3 workouts
-                .ToList();
-
-            lst_Workouts.Items.Clear(); // Clear the ListBox before adding new items
+            var workouts = _context.Workouts.Where(w => w.Date == today).ToList();
 
             if (workouts.Any())
             {
-                foreach (var workout in workouts)
-                {
-                    lst_Workouts.Items.Add($"{workout.Type}: {workout.Repetitions} sets, {workout.Duration} mins");
-                }
+                lbl_TodayWorkout.Text = "Today's Workouts:\n" +
+                    string.Join("\n", workouts.Take(3).Select(w => $"{w.Type}: {w.Repetitions} Sets"));
             }
             else
             {
-                lst_Workouts.Items.Add("No workouts logged today.");
+                lbl_TodayWorkout.Text = "Today's Workouts: None";
             }
         }
 
-        private void RefreshMeals()
+        private void LoadNutritionData()
         {
             var today = DateTime.Today;
-            var meals = _context.Meals
-                .Where(m => m.MealDate == today)
-                .Take(3) // Show up to 3 meals
-                .ToList();
-
-            lst_Meals.Items.Clear(); // Clear the ListBox before adding new items
+            var meals = _context.Meals.Where(m => m.MealDate == today).ToList();
 
             if (meals.Any())
             {
-                foreach (var meal in meals)
-                {
-                    lst_Meals.Items.Add($"{meal.MealName}: {meal.Calories} calories");
-                }
+                lbl_TodayMeals.Text = "Today's Meals:\n" +
+                    string.Join("\n", meals.Take(3).Select(m => $"{m.MealName}: {m.Calories} Calories"));
             }
             else
             {
-                lst_Meals.Items.Add("No meals logged today.");
+                lbl_TodayMeals.Text = "Today's Meals: None";
             }
         }
 
@@ -102,13 +87,6 @@ namespace FitnessApp
             var loginForm = new LoginForm(_context);
             loginForm.Show();
             this.Close();
-        }
-
-        protected override void OnShown(EventArgs e)
-        {
-            base.OnShown(e);
-            RefreshWorkouts();
-            RefreshMeals();
         }
     }
 }

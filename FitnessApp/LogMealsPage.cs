@@ -72,39 +72,6 @@ namespace FitnessApp
                 MessageBox.Show("Please select a meal to delete.", "Error");
             }
         }
-
-        private void btn_UpdateMeal_Click(object sender, EventArgs e)
-        {
-            if (dgv_Meals.CurrentRow != null)
-            {
-                try
-                {
-                    var selectedMeal = (Meal)dgv_Meals.CurrentRow.DataBoundItem;
-
-                    selectedMeal.MealName = txt_MealName.Text;
-                    selectedMeal.Description = txt_Description.Text;
-                    selectedMeal.Calories = int.Parse(txt_Calories.Text);
-                    selectedMeal.ProteinPercentage = int.Parse(txt_Protein.Text);
-                    selectedMeal.CarbsPercentage = int.Parse(txt_Carbs.Text);
-                    selectedMeal.FatPercentage = int.Parse(txt_Fat.Text);
-                    selectedMeal.MealDate = dtp_Date.Value.Date;
-
-                    _context.SaveChanges();
-
-                    MessageBox.Show("Meal updated successfully!", "Success");
-                    RefreshMeals();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error: {ex.Message}", "Error");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a meal to update.", "Error");
-            }
-        }
-
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
             RefreshMeals();

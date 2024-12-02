@@ -23,204 +23,235 @@
 
         private void InitializeComponent()
         {
-            this.lbl_MealName = new System.Windows.Forms.Label();
-            this.txt_MealName = new System.Windows.Forms.TextBox();
-            this.lbl_Description = new System.Windows.Forms.Label();
-            this.txt_Description = new System.Windows.Forms.TextBox();
-            this.lbl_Calories = new System.Windows.Forms.Label();
-            this.txt_Calories = new System.Windows.Forms.TextBox();
-            this.lbl_Macros = new System.Windows.Forms.Label();
-            this.txt_Protein = new System.Windows.Forms.TextBox();
-            this.txt_Carbs = new System.Windows.Forms.TextBox();
-            this.txt_Fat = new System.Windows.Forms.TextBox();
-            this.lbl_Date = new System.Windows.Forms.Label();
-            this.dtp_Date = new System.Windows.Forms.DateTimePicker();
-            this.btn_AddMeal = new System.Windows.Forms.Button();
-            this.btn_DeleteMeal = new System.Windows.Forms.Button();
-            this.btn_UpdateMeal = new System.Windows.Forms.Button();
-            this.btn_Refresh = new System.Windows.Forms.Button();
-            this.btn_ViewHistory = new System.Windows.Forms.Button();
-            this.dgv_Meals = new System.Windows.Forms.DataGridView();
-            this.btn_Back = new System.Windows.Forms.Button();
-
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Meals)).BeginInit();
-            this.SuspendLayout();
-
-            // Label: Meal Name
-            this.lbl_MealName.AutoSize = true;
-            this.lbl_MealName.Location = new System.Drawing.Point(20, 20);
-            this.lbl_MealName.Name = "lbl_MealName";
-            this.lbl_MealName.Size = new System.Drawing.Size(82, 20);
-            this.lbl_MealName.TabIndex = 0;
-            this.lbl_MealName.Text = "Meal Name";
-
-            // TextBox: Meal Name
-            this.txt_MealName.Location = new System.Drawing.Point(150, 20);
-            this.txt_MealName.Name = "txt_MealName";
-            this.txt_MealName.Size = new System.Drawing.Size(200, 26);
-            this.txt_MealName.TabIndex = 1;
-
-            // Label: Description
-            this.lbl_Description.AutoSize = true;
-            this.lbl_Description.Location = new System.Drawing.Point(20, 60);
-            this.lbl_Description.Name = "lbl_Description";
-            this.lbl_Description.Size = new System.Drawing.Size(85, 20);
-            this.lbl_Description.TabIndex = 2;
-            this.lbl_Description.Text = "Description";
-
-            // TextBox: Description
-            this.txt_Description.Location = new System.Drawing.Point(150, 60);
-            this.txt_Description.Name = "txt_Description";
-            this.txt_Description.Size = new System.Drawing.Size(200, 26);
-            this.txt_Description.TabIndex = 3;
-
-            // Label: Calories
-            this.lbl_Calories.AutoSize = true;
-            this.lbl_Calories.Location = new System.Drawing.Point(20, 100);
-            this.lbl_Calories.Name = "lbl_Calories";
-            this.lbl_Calories.Size = new System.Drawing.Size(64, 20);
-            this.lbl_Calories.TabIndex = 4;
-            this.lbl_Calories.Text = "Calories";
-
-            // TextBox: Calories
-            this.txt_Calories.Location = new System.Drawing.Point(150, 100);
-            this.txt_Calories.Name = "txt_Calories";
-            this.txt_Calories.Size = new System.Drawing.Size(200, 26);
-            this.txt_Calories.TabIndex = 5;
-
-            // Label: Macros
-            this.lbl_Macros.AutoSize = true;
-            this.lbl_Macros.Location = new System.Drawing.Point(20, 140);
-            this.lbl_Macros.Name = "lbl_Macros";
-            this.lbl_Macros.Size = new System.Drawing.Size(59, 20);
-            this.lbl_Macros.TabIndex = 6;
-            this.lbl_Macros.Text = "Macros";
-
-            // TextBox: Protein
-            this.txt_Protein.Location = new System.Drawing.Point(150, 140);
-            this.txt_Protein.Name = "txt_Protein";
-            this.txt_Protein.PlaceholderText = "Protein (%)";
-            this.txt_Protein.Size = new System.Drawing.Size(60, 26);
-            this.txt_Protein.TabIndex = 7;
-
-            // TextBox: Carbs
-            this.txt_Carbs.Location = new System.Drawing.Point(220, 140);
-            this.txt_Carbs.Name = "txt_Carbs";
-            this.txt_Carbs.PlaceholderText = "Carbs (%)";
-            this.txt_Carbs.Size = new System.Drawing.Size(60, 26);
-            this.txt_Carbs.TabIndex = 8;
-
-            // TextBox: Fat
-            this.txt_Fat.Location = new System.Drawing.Point(290, 140);
-            this.txt_Fat.Name = "txt_Fat";
-            this.txt_Fat.PlaceholderText = "Fat (%)";
-            this.txt_Fat.Size = new System.Drawing.Size(60, 26);
-            this.txt_Fat.TabIndex = 9;
-
-            // Label: Date
-            this.lbl_Date.AutoSize = true;
-            this.lbl_Date.Location = new System.Drawing.Point(20, 180);
-            this.lbl_Date.Name = "lbl_Date";
-            this.lbl_Date.Size = new System.Drawing.Size(38, 20);
-            this.lbl_Date.TabIndex = 10;
-            this.lbl_Date.Text = "Date";
-
-            // DateTimePicker: Date
-            this.dtp_Date.Location = new System.Drawing.Point(150, 180);
-            this.dtp_Date.Name = "dtp_Date";
-            this.dtp_Date.Size = new System.Drawing.Size(200, 26);
-            this.dtp_Date.TabIndex = 11;
-
-            // Button: Add Meal
-            this.btn_AddMeal.Location = new System.Drawing.Point(20, 220);
-            this.btn_AddMeal.Name = "btn_AddMeal";
-            this.btn_AddMeal.Size = new System.Drawing.Size(100, 30);
-            this.btn_AddMeal.TabIndex = 12;
-            this.btn_AddMeal.Text = "Add Meal";
-            this.btn_AddMeal.UseVisualStyleBackColor = true;
-            this.btn_AddMeal.Click += new System.EventHandler(this.btn_AddMeal_Click);
-
-            // Button: Delete Meal
-            this.btn_DeleteMeal.Location = new System.Drawing.Point(130, 220);
-            this.btn_DeleteMeal.Name = "btn_DeleteMeal";
-            this.btn_DeleteMeal.Size = new System.Drawing.Size(100, 30);
-            this.btn_DeleteMeal.TabIndex = 13;
-            this.btn_DeleteMeal.Text = "Delete Meal";
-            this.btn_DeleteMeal.UseVisualStyleBackColor = true;
-            this.btn_DeleteMeal.Click += new System.EventHandler(this.btn_DeleteMeal_Click);
-
-            // Button: Update Meal
-            this.btn_UpdateMeal.Location = new System.Drawing.Point(240, 220);
-            this.btn_UpdateMeal.Name = "btn_UpdateMeal";
-            this.btn_UpdateMeal.Size = new System.Drawing.Size(100, 30);
-            this.btn_UpdateMeal.TabIndex = 14;
-            this.btn_UpdateMeal.Text = "Update Meal";
-            this.btn_UpdateMeal.UseVisualStyleBackColor = true;
-            this.btn_UpdateMeal.Click += new System.EventHandler(this.btn_UpdateMeal_Click);
-
-            // Button: Refresh
-            this.btn_Refresh.Location = new System.Drawing.Point(350, 220);
-            this.btn_Refresh.Name = "btn_Refresh";
-            this.btn_Refresh.Size = new System.Drawing.Size(100, 30);
-            this.btn_Refresh.TabIndex = 15;
-            this.btn_Refresh.Text = "Refresh";
-            this.btn_Refresh.UseVisualStyleBackColor = true;
-            this.btn_Refresh.Click += new System.EventHandler(this.btn_Refresh_Click);
-
-            // Button: View History
-            this.btn_ViewHistory.Location = new System.Drawing.Point(460, 220);
-            this.btn_ViewHistory.Name = "btn_ViewHistory";
-            this.btn_ViewHistory.Size = new System.Drawing.Size(150, 30);
-            this.btn_ViewHistory.TabIndex = 16;
-            this.btn_ViewHistory.Text = "View History";
-            this.btn_ViewHistory.UseVisualStyleBackColor = true;
-            this.btn_ViewHistory.Click += new System.EventHandler(this.btn_ViewHistory_Click);
-
-            // DataGridView: Meals
-            this.dgv_Meals.Location = new System.Drawing.Point(20, 270);
-            this.dgv_Meals.Name = "dgv_Meals";
-            this.dgv_Meals.Size = new System.Drawing.Size(600, 200);
-            this.dgv_Meals.TabIndex = 17;
-
-            // Button: Back
-            this.btn_Back.Location = new System.Drawing.Point(20, 490);
-            this.btn_Back.Name = "btn_Back";
-            this.btn_Back.Size = new System.Drawing.Size(100, 30);
-            this.btn_Back.TabIndex = 18;
-            this.btn_Back.Text = "Back";
-            this.btn_Back.UseVisualStyleBackColor = true;
-            this.btn_Back.Click += new System.EventHandler(this.btn_Back_Click);
-
+            lbl_Title = new Label();
+            lbl_MealName = new Label();
+            txt_MealName = new TextBox();
+            lbl_Description = new Label();
+            txt_Description = new TextBox();
+            lbl_Calories = new Label();
+            txt_Calories = new TextBox();
+            lbl_Macros = new Label();
+            txt_Protein = new TextBox();
+            txt_Carbs = new TextBox();
+            txt_Fat = new TextBox();
+            lbl_Date = new Label();
+            dtp_Date = new DateTimePicker();
+            btn_AddMeal = new Button();
+            btn_DeleteMeal = new Button();
+            btn_Refresh = new Button();
+            btn_ViewHistory = new Button();
+            btn_Back = new Button();
+            dgv_Meals = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgv_Meals).BeginInit();
+            SuspendLayout();
+            // 
+            // lbl_Title
+            // 
+            lbl_Title.AutoSize = true;
+            lbl_Title.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            lbl_Title.ForeColor = Color.White;
+            lbl_Title.Location = new Point(220, 20);
+            lbl_Title.Name = "lbl_Title";
+            lbl_Title.Size = new Size(213, 37);
+            lbl_Title.TabIndex = 0;
+            lbl_Title.Text = "Log Your Meals";
+            // 
+            // lbl_MealName
+            // 
+            lbl_MealName.AutoSize = true;
+            lbl_MealName.ForeColor = Color.White;
+            lbl_MealName.Location = new Point(20, 80);
+            lbl_MealName.Name = "lbl_MealName";
+            lbl_MealName.Size = new Size(86, 20);
+            lbl_MealName.TabIndex = 1;
+            lbl_MealName.Text = "Meal Name";
+            // 
+            // txt_MealName
+            // 
+            txt_MealName.Location = new Point(150, 80);
+            txt_MealName.Name = "txt_MealName";
+            txt_MealName.Size = new Size(200, 27);
+            txt_MealName.TabIndex = 2;
+            // 
+            // lbl_Description
+            // 
+            lbl_Description.AutoSize = true;
+            lbl_Description.ForeColor = Color.White;
+            lbl_Description.Location = new Point(20, 120);
+            lbl_Description.Name = "lbl_Description";
+            lbl_Description.Size = new Size(85, 20);
+            lbl_Description.TabIndex = 3;
+            lbl_Description.Text = "Description";
+            // 
+            // txt_Description
+            // 
+            txt_Description.Location = new Point(150, 120);
+            txt_Description.Name = "txt_Description";
+            txt_Description.Size = new Size(200, 27);
+            txt_Description.TabIndex = 4;
+            // 
+            // lbl_Calories
+            // 
+            lbl_Calories.AutoSize = true;
+            lbl_Calories.ForeColor = Color.White;
+            lbl_Calories.Location = new Point(20, 160);
+            lbl_Calories.Name = "lbl_Calories";
+            lbl_Calories.Size = new Size(62, 20);
+            lbl_Calories.TabIndex = 5;
+            lbl_Calories.Text = "Calories";
+            // 
+            // txt_Calories
+            // 
+            txt_Calories.Location = new Point(150, 160);
+            txt_Calories.Name = "txt_Calories";
+            txt_Calories.Size = new Size(200, 27);
+            txt_Calories.TabIndex = 6;
+            // 
+            // lbl_Macros
+            // 
+            lbl_Macros.AutoSize = true;
+            lbl_Macros.ForeColor = Color.White;
+            lbl_Macros.Location = new Point(20, 200);
+            lbl_Macros.Name = "lbl_Macros";
+            lbl_Macros.Size = new Size(57, 20);
+            lbl_Macros.TabIndex = 7;
+            lbl_Macros.Text = "Macros";
+            // 
+            // txt_Protein
+            // 
+            txt_Protein.Location = new Point(150, 200);
+            txt_Protein.PlaceholderText = "Protein (%)";
+            txt_Protein.Name = "txt_Protein";
+            txt_Protein.Size = new Size(60, 27);
+            txt_Protein.TabIndex = 8;
+            // 
+            // txt_Carbs
+            // 
+            txt_Carbs.Location = new Point(220, 200);
+            txt_Carbs.PlaceholderText = "Carbs (%)";
+            txt_Carbs.Name = "txt_Carbs";
+            txt_Carbs.Size = new Size(60, 27);
+            txt_Carbs.TabIndex = 9;
+            // 
+            // txt_Fat
+            // 
+            txt_Fat.Location = new Point(290, 200);
+            txt_Fat.Name = "txt_Fat";
+            txt_Fat.PlaceholderText = "Fat (%)";
+            txt_Fat.Size = new Size(60, 27);
+            txt_Fat.TabIndex = 10;
+            // 
+            // lbl_Date
+            // 
+            lbl_Date.AutoSize = true;
+            lbl_Date.ForeColor = Color.White;
+            lbl_Date.Location = new Point(20, 240);
+            lbl_Date.Name = "lbl_Date";
+            lbl_Date.Size = new Size(41, 20);
+            lbl_Date.TabIndex = 11;
+            lbl_Date.Text = "Date";
+            // 
+            // dtp_Date
+            // 
+            dtp_Date.Location = new Point(150, 240);
+            dtp_Date.Name = "dtp_Date";
+            dtp_Date.Size = new Size(200, 27);
+            dtp_Date.TabIndex = 12;
+            // 
+            // btn_AddMeal
+            // 
+            btn_AddMeal.Location = new Point(20, 290);
+            btn_AddMeal.Name = "btn_AddMeal";
+            btn_AddMeal.Size = new Size(100, 30);
+            btn_AddMeal.TabIndex = 13;
+            btn_AddMeal.Text = "Add Meal";
+            btn_AddMeal.UseVisualStyleBackColor = true;
+            btn_AddMeal.Click += btn_AddMeal_Click;
+            // 
+            // btn_DeleteMeal
+            // 
+            btn_DeleteMeal.Location = new Point(130, 290);
+            btn_DeleteMeal.Name = "btn_DeleteMeal";
+            btn_DeleteMeal.Size = new Size(100, 30);
+            btn_DeleteMeal.TabIndex = 14;
+            btn_DeleteMeal.Text = "Delete Meal";
+            btn_DeleteMeal.UseVisualStyleBackColor = true;
+            btn_DeleteMeal.Click += btn_DeleteMeal_Click;
+            //    
+            // btn_Refresh
+            // 
+            btn_Refresh.Location = new Point(350, 290);
+            btn_Refresh.Name = "btn_Refresh";
+            btn_Refresh.Size = new Size(100, 30);
+            btn_Refresh.TabIndex = 15;
+            btn_Refresh.Text = "Refresh";
+            btn_Refresh.UseVisualStyleBackColor = true;
+            btn_Refresh.Click += btn_Refresh_Click;
+            // 
+            // btn_ViewHistory
+            // 
+            btn_ViewHistory.Location = new Point(460, 290);
+            btn_ViewHistory.Name = "btn_ViewHistory";
+            btn_ViewHistory.Size = new Size(150, 30);
+            btn_ViewHistory.TabIndex = 17;
+            btn_ViewHistory.Text = "View History";
+            btn_ViewHistory.UseVisualStyleBackColor = true;
+            btn_ViewHistory.Click += btn_ViewHistory_Click;
+            // 
+            // btn_Back
+            // 
+            btn_Back.Location = new Point(20, 560);
+            btn_Back.Name = "btn_Back";
+            btn_Back.Size = new Size(100, 30);
+            btn_Back.TabIndex = 19;
+            btn_Back.Text = "Back";
+            btn_Back.UseVisualStyleBackColor = true;
+            btn_Back.Click += btn_Back_Click;
+            // 
+            // dgv_Meals
+            // 
+            dgv_Meals.ColumnHeadersHeight = 29;
+            dgv_Meals.Location = new Point(20, 340);
+            dgv_Meals.Name = "dgv_Meals";
+            dgv_Meals.RowHeadersWidth = 51;
+            dgv_Meals.Size = new Size(600, 200);
+            dgv_Meals.TabIndex = 18;
+            // 
             // LogMealsPage
-            this.ClientSize = new System.Drawing.Size(650, 550);
-            this.Controls.Add(this.lbl_MealName);
-            this.Controls.Add(this.txt_MealName);
-            this.Controls.Add(this.lbl_Description);
-            this.Controls.Add(this.txt_Description);
-            this.Controls.Add(this.lbl_Calories);
-            this.Controls.Add(this.txt_Calories);
-            this.Controls.Add(this.lbl_Macros);
-            this.Controls.Add(this.txt_Protein);
-            this.Controls.Add(this.txt_Carbs);
-            this.Controls.Add(this.txt_Fat);
-            this.Controls.Add(this.lbl_Date);
-            this.Controls.Add(this.dtp_Date);
-            this.Controls.Add(this.btn_AddMeal);
-            this.Controls.Add(this.btn_DeleteMeal);
-            this.Controls.Add(this.btn_UpdateMeal);
-            this.Controls.Add(this.btn_Refresh);
-            this.Controls.Add(this.btn_ViewHistory);
-            this.Controls.Add(this.dgv_Meals);
-            this.Controls.Add(this.btn_Back);
-            this.Name = "LogMealsPage";
-            this.Text = "Log Meals";
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Meals)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            BackColor = Color.DarkOrange;
+            ClientSize = new Size(700, 600);
+            Controls.Add(lbl_Title);
+            Controls.Add(lbl_MealName);
+            Controls.Add(txt_MealName);
+            Controls.Add(lbl_Description);
+            Controls.Add(txt_Description);
+            Controls.Add(lbl_Calories);
+            Controls.Add(txt_Calories);
+            Controls.Add(lbl_Macros);
+            Controls.Add(txt_Protein);
+            Controls.Add(txt_Carbs);
+            Controls.Add(txt_Fat);
+            Controls.Add(lbl_Date);
+            Controls.Add(dtp_Date);
+            Controls.Add(btn_AddMeal);
+            Controls.Add(btn_DeleteMeal);
+            Controls.Add(btn_Refresh);
+            Controls.Add(btn_ViewHistory);
+            Controls.Add(dgv_Meals);
+            Controls.Add(btn_Back);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Name = "LogMealsPage";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Log Meals";
+            ((System.ComponentModel.ISupportInitialize)dgv_Meals).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
+        private System.Windows.Forms.Label lbl_Title;
         private System.Windows.Forms.Label lbl_MealName;
         private System.Windows.Forms.TextBox txt_MealName;
         private System.Windows.Forms.Label lbl_Description;
@@ -235,11 +266,11 @@
         private System.Windows.Forms.DateTimePicker dtp_Date;
         private System.Windows.Forms.Button btn_AddMeal;
         private System.Windows.Forms.Button btn_DeleteMeal;
-        private System.Windows.Forms.Button btn_UpdateMeal;
         private System.Windows.Forms.Button btn_Refresh;
         private System.Windows.Forms.Button btn_ViewHistory;
-        private System.Windows.Forms.DataGridView dgv_Meals;
         private System.Windows.Forms.Button btn_Back;
+        private System.Windows.Forms.DataGridView dgv_Meals;
     }
 }
+
 
