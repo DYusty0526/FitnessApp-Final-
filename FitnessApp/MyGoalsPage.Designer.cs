@@ -150,6 +150,7 @@
             this.txt_MaxMacros.Location = new System.Drawing.Point(250, 170);
             this.txt_MaxMacros.Name = "txt_MaxMacros";
             this.txt_MaxMacros.PlaceholderText = "Max Macros";
+            this.txt_MaxMacros.PlaceholderText = "P%, C%, F%";
             this.txt_MaxMacros.Size = new System.Drawing.Size(200, 26);
             this.txt_MaxMacros.TabIndex = 10;
 

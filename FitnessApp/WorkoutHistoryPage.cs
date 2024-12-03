@@ -37,7 +37,7 @@ namespace FitnessApp
 
         private void LoadAttendanceData()
         {
-            // Example data: Retrieve the last 6 months of attendance data
+            // Retrieve the last 6 months of attendance data
             var today = DateTime.Today;
             var sixMonthsAgo = today.AddMonths(-6);
 

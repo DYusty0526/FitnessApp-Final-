@@ -80,6 +80,7 @@
             // Duration TextBox
             this.txt_Duration.Location = new System.Drawing.Point(150, 120);
             this.txt_Duration.Name = "txt_Duration";
+            this.txt_Duration.PlaceholderText = "In Minutes";
             this.txt_Duration.Size = new System.Drawing.Size(200, 26);
             this.txt_Duration.TabIndex = 4;
 

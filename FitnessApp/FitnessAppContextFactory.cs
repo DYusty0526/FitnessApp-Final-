@@ -13,7 +13,7 @@ public class FitnessAppContextFactory : IDesignTimeDbContextFactory<FitnessAppCo
     {
         var optionsBuilder = new DbContextOptionsBuilder<FitnessAppContext>();
 
-        // Add your connection string here
+        // connection string here
         optionsBuilder.UseSqlServer("Server=CUYABRO-LAPTOP2\\SQLEXPRESS;Database=FitnessAppDB;Trusted_Connection=True;TrustServerCertificate=True;");
 
         return new FitnessAppContext(optionsBuilder.Options);

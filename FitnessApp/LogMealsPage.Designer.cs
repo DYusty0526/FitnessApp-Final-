@@ -120,16 +120,16 @@
             // txt_Protein
             // 
             txt_Protein.Location = new Point(150, 200);
-            txt_Protein.PlaceholderText = "Protein (%)";
             txt_Protein.Name = "txt_Protein";
+            txt_Protein.PlaceholderText = "Protein (%)";
             txt_Protein.Size = new Size(60, 27);
             txt_Protein.TabIndex = 8;
             // 
             // txt_Carbs
             // 
             txt_Carbs.Location = new Point(220, 200);
-            txt_Carbs.PlaceholderText = "Carbs (%)";
             txt_Carbs.Name = "txt_Carbs";
+            txt_Carbs.PlaceholderText = "Carbs (%)";
             txt_Carbs.Size = new Size(60, 27);
             txt_Carbs.TabIndex = 9;
             // 
@@ -177,7 +177,7 @@
             btn_DeleteMeal.Text = "Delete Meal";
             btn_DeleteMeal.UseVisualStyleBackColor = true;
             btn_DeleteMeal.Click += btn_DeleteMeal_Click;
-            //    
+            // 
             // btn_Refresh
             // 
             btn_Refresh.Location = new Point(350, 290);
@@ -190,10 +190,13 @@
             // 
             // btn_ViewHistory
             // 
-            btn_ViewHistory.Location = new Point(460, 290);
+            btn_ViewHistory.BackColor = Color.White;
+            btn_ViewHistory.FlatStyle = FlatStyle.Flat;
+            btn_ViewHistory.ForeColor = Color.DarkOrange;
+            btn_ViewHistory.Location = new Point(538, 560);
             btn_ViewHistory.Name = "btn_ViewHistory";
             btn_ViewHistory.Size = new Size(150, 30);
-            btn_ViewHistory.TabIndex = 17;
+            btn_ViewHistory.TabIndex = 19;
             btn_ViewHistory.Text = "View History";
             btn_ViewHistory.UseVisualStyleBackColor = true;
             btn_ViewHistory.Click += btn_ViewHistory_Click;
